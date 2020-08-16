@@ -1,0 +1,332 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{t1enc}
+\usepackage[magyar]{babel}
+\sloppy
+
+\title{Ész Ventura\\97.~feladvány: Kagylógyűjtés\\\large A strandon is akadhatnak matematikai problémák!}
+\author{Endrey Márk}
+
+%\usepackage{fdsymbol}
+\usepackage{tikz}
+\usepackage{tikzsymbols}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage[swfilledspoon]{MnSymbol} % \swfilledspoon
+\usepackage{txfonts}
+
+\usepackage{comment}
+
+\newcommand{\she}[1]{\ensuremath{\Strichmaxerl_{#1}}}
+\newcommand{\oys}[1]{\ensuremath{(\!|\!)_{#1}}}
+
+\newcommand{\chm}{$\checkmark$}
+\newcommand{\incidsymbol}{\bullet\!\!\!\checkmark}
+\newcommand{\incid}{\mathrel{\incidsymbol}} % or \dfourier from apackage trfsigns
+
+\newtheorem{subproblem}{részfeladat}
+\newtheorem*{reword}{Átfogalmazás}
+\newtheorem*{answer}{Válasz}
+\newtheorem*{subquestion}{Részkérdés}
+\renewcommand{\qedsymbol}{$\blacksquare$\textbf{(Q.E.D.)}}
+
+\begin{document}
+	\maketitle
+
+	\tableofcontents
+
+	\section{Szinopszis}
+
+	\begin{subproblem}[Alapfeladat]
+		Hat gyerek mindegyike négy fél kagylót gyűjtött a homokos parton, de senkinél nincs összetartozó pár. Ugyanakkor minden kagylóhéjnak a párját felszedte valaki. Kérdés: mindig össze tudsz gyűjteni három összetartozó párt, ha minden gyerektől egy felet választhatsz?
+	\end{subproblem}
+	\begin{reword}
+		Igaz-e, hogy minden lehetséges 6-rendű 4-reguláris hurokélmentes multigráfnak van független lefedő élhalmaza?
+	\end{reword}
+	\begin{answer}
+		Nem igaz, hiszen van ellenpélda. Vagyis létezik olyen 6-rendű 4-reguláris hurokélmentes multigráf, amelynek nincs független lefedő élhalmaza.
+	\end{answer}
+	\begin{proof}
+		Íme az ellenpélda megszerkesztése:
+
+		Legyen $\mathfrak G = \left\langle \mathcal V, \mathcal E, \incidsymbol\right\rangle$ multigráf az $\incidsymbol$ illeszkedési relációval $\left(\incidsymbol \subseteq \mathcal V \times \mathcal E\right)$, ahol
+		\begin{itemize}
+			\item Csúcsok: $\mathcal V = \left\lbrace\,\she A, \she B, \she C, \she{A^\prime}, \she{B^\prime}, \she{C^\prime} \,\right\rbrace$ (a gyerekek --- Aladár, Béla, Csaba fiúk; és Anna, Bernadett, Csilla lányok)
+			\item Élek: $\mathcal E = \left\lbrace\,\oys1^{AB}, \oys2^{AB}, \oys1^{BC}, \oys2^{BC}, \oys1^{CA}, \oys2^{CA}, \oys1^{A^\prime B^\prime}, \oys2^{A^\prime B^\prime}, \oys1^{B^\prime C^\prime}, \oys2^{B^\prime C^\prime}, \oys1^{C^\prime A^\prime}, \oys2^{C^\prime A^\prime}  \,\right\rbrace$ (a kagylók)
+			\item  Az $\incidsymbol$ illeszkedési relációt megadó séma: $\she X \incid \oys{i}^{XY}$ és $\she Y \incid \oys{i}^{XY}$, ahol $i$ futóindex, és $X$, $Y$ metaváltozó: $i \in \left\lbrace\,1,2,3\,\right\rbrace$ és $X, Y \in \left\lbrace\,A, B, C, A^\prime, B^\prime, C^\prime\,\right\rbrace$.
+		\end{itemize}
+
+		Ábrázolás:
+
+		\input{6-rendu-4-regularis.pgf}
+
+		A megadott ellenpélda mögött húzódó fő megfontolások:
+
+		,,Kikkesedés'': A megadott ellenpéldában felmutatott multigráf nem-összefüggő: két komponensre bomlik. Ez azt reprezentálja. hogy a gyerekek erősen ,,klikkesednek'': a fiúkat egymással és  csak egymással szoros kapcsolat köti össze a kagylómegosztások révén. Ugyanaz igaz a lányok klikkjére is.
+
+		,,Kiaknázhatatlanság'': Az erős klikkesedés miatt mindenképp lesznek ,,fölösleges'', ,,kiaknázhatatlan'' gyerekek a három teljes kagylót (vagyis héjpárt) begyűjteni akaró turista számára, akármilyen módon is szeretné ,,beszedni'' tőlük a kagylókat. Vagyis amikor én mint turista egy fiútól kérek egy kagylóhéjat, akkor ő egy fiútársával együtt tud nyújtani egy teljes kagylót nekem. A harmadik fiú viszont már csak olyan héjakkal rendelkezik, amelyek párjai mind az előző két fiúnál vannak, így ez a harmadik fiú immár kihasználhatatlan, ,,felesleges'' az én szempontomból (vagyis a három kagylót begyűjteni akaró turista szempontjából). Ezáltal mind a három fiút ,,elsütöttem'', de közülük csak kettőt ,,aknáztam ki'' hasznosan, a harmadik fiú merő ,,payload'' lett számomra. Ugyanez igaz a lányok klikkjére is, hiszen a lányklikk mint  részgráf teljesen izomorf a fiúklikk részgráffal.
+
+		,,Kifutás a lehetőségekből'': A fentiek alapján tehát csak két fiú és két lány tud számomra héjakat szolgáltatni,  tőlük pedig már puszta számossági okokból is lehetetlen három kagylót begyűjtenem (skatulyaelv, pigeonhole principle, Schubfachprinzip).
+	\end{proof}
+	\begin{subquestion}
+		Igazolni kell még, nincs-e csalás magában a szemléltetésben, vagyis a reprezentációs módban.
+		Jogos-e a kagylóhéjakon osztozkodó gyerekcsoportot multigráfként modellezni, érvényes-e a modell?
+		Eddig hallgatólagosan feltételeztük, hogy ez az ábrázolásmód helyes.
+	\end{subquestion}
+	\begin{proof}
+		Az alábbiakat kell igazolni:
+		\begin{itemize}
+			\item Egy kagylón mindig pontosan két gyerek tud megosztozni (egyetlen gyerek sem rendelkezik teljes kagylóval), de két gyerek közösködhetik egymással egynél több kagylón is. Ez idáig meglapozza a hurokélmentes multigráf fogalomkészletének használását a modellezésben.
+			\item Minden egyes gyereknél négy-négy héj van, a multigráf minden egyes csúcsának fokszáma 4 (pontosan négy darab él illeszkedik rá). Egyszóval: multigráfunk 4-reguláris.
+			\item Én, a turista be akarok tőlük gyűjteni a hat gyyerektől három kagylót, úgy, hogy egy-egy gyerektől csak egyetlen héjat kunyerálhatok, egyetlen gyerektől sem kunyizhatok kétszer. Viszont a sktaulyaelv miatt ezt a gyerekenkénti egyetlen alkalmat ki is kell használnom minden egyes gyerek esetében, senkivel sem kivételezhetek. Tehát 3 élt kell behúznom hat csúcs közé, úgy, hogy ebben a részgráfban minden egyes csúcs csakis 1-fokszámú lehet. Ez pontosan azt jelenti, hogy az így kiválasztásra kerülő 1-reguláris részgráf élei \emph{független élrendszert} fognak alkotni (hiszen különben lenne csatlakozócsúcs, vagyis 1-nél nagyobb fokszám is). Ugynakkor a részgráf egyúttal \emph{lefedő élhalmaz} is lesz, hiszen a skatulyaelv miatt csak az összes gyerek igénybevételével gyűlhet össze a kellő számú héj. Tehát valóban \emph{független lefedő élhalmaz} kereséséről van szó.
+		\end{itemize}
+
+		Az ábrázolási, modellezési mód tehát helyes.
+	\end{proof}
+
+	\section{A többi részfeladat}
+
+	Érdemes újra megnézni, mik voltak azok a kulcsgondolatok az Alapfeladat megoldásakor, amelyeket majd más hasonló feladatokra is általánosíthatunk.
+	Az alábbi gondolati lépéseken megyünk végig:
+	\begin{enumerate}
+		\item Legyenek ,,\emph{fölösleges}'', a turista számára többletet nyújtani nem tudó gyerekek, ugyanis ilyen esetben már biztos, hogy a turista nem fogja tudni begyűjteni a kívánt számú kagylót.
+		\item Efféle ,,fölesleges gyerekek'' jelenléte pedig úgy érhető el, ha elég szoros ,,\emph{klikkesedést}'' hozunk létre. Ezen azt értjük, hogy egyes gyerekek közt teremtsen nagyon szoros kapcsolatrendszert a közösen megosztott ,,kagylózat''.
+		\item Bár ez a feladat szempontjából nem feltétlenül jelenti azt, hogy a gráfnak el kellene veszítenie \emph{összefüggőségét}, és \emph{komponensekre} kellene bomlania, de mégis könnyebb ellenpéldát találni úgy, ha eleve komponsesekre bomló módon írjuk fel a feladat fő gráfját.
+		\item Ha ezt jól eltaláljuk, az egyes konkrét próbálkozási példákból, ,,forgatókönyvekből'',  a konkrét gráfokból már  már többnyire kiválaszthatunk alkalmas ellenpéldát. Ha nem, akkor a feladat már nehezebb, de itt mind a három feladat könnyű ebből a szempontból (nem kell ellenpélda lehetetlenségét igazolni, konkrét ellenpéldák pedig a fentiek alapján pár próbálkozás után találhatóak mndhárom feladat esetében).
+	\end{enumerate}
+
+	Most már jöhetnek a folytatólagos részfeladatok:
+
+	\begin{subproblem}
+		Mi a helyzet akkor, ha 15 pár van a homokban, és a gyerekek mindegyike 5-5 kagylót gyűjtött, de most sincs senkinél pár? Igaz-e, hogy mindig össze lehet kunyerálni három párat, ha mindenkitől 1 tetszőlegeset választhatunk?
+	\end{subproblem}
+	\begin{reword}
+		Igaz-e, hogy minden lehetséges 6-rendű 5-reguláris hurokélmentes multigráfnak van független lefedő élhalmaza?
+	\end{reword}
+	\begin{answer}
+		Nem igaz, hiszen van ellenpélda. Vagyis létezik olyen 6-rendű 5-reguláris hurokélmentes multigráf, amelynek nincs független lefedő élhalmaza.
+	\end{answer}
+	\begin{proof}
+		Íme az ellenpélda megszerkesztése:
+
+		\input{6-rendu-5-regularis.pgf}
+	\end{proof}
+
+	\begin{subproblem}
+		És ha 50 kagyló van (azaz 100 fél darab) és 10 gyerek mindegyike 10 felet gyűjtött, de senkinél nincs pár, és 5 összetartozó felet szeretnék összekunyerálni?
+	\end{subproblem}
+	\begin{reword}
+		Igaz-e, hogy minden lehetséges 10-rendű 10-reguláris hurokélmentes multigráfnak van független lefedő élhalmaza?
+	\end{reword}
+	\begin{answer}
+		Nem igaz, hiszen van ellenpélda. Vagyis létezik olyen 10-rendű 10-reguláris hurokélmentes multigráf, amelynek nincs független lefedő élhalmaza.
+	\end{answer}
+	\begin{proof}
+		Íme az ellenpélda megszerkesztése:
+
+		\input{10-rendu-10-regularis.pgf}
+	\end{proof}
+	
+	\begin{comment}
+		$\mathfrak G = \left\langle \mathcal V, \mathcal E, \incidsymbol\right\rangle\,\,\,\,\,\,(\incidsymbol \in \mathcal V \times \mathcal E)$, ahol
+		\begin{itemize}
+			\item $\mathcal V = \left\lbrace\,\she1, \she2, \she3, \she4, \she5, \she6 \,\right\rbrace$ (gyerekek mint a gráf csúcsai)
+			\item $\mathcal E = \left\lbrace\,\oys{1,2}^1, \oys{1,2}^2, \oys{1,2}^3, \oys{1,2}^4, \oys{1,2}^5, \oys{2,3}^1, \oys{2,3}^2, \oys{2,3}^3, \oys{2,3}^4, \oys{2,3}^5, \oys{3,1}^1, \oys{3,1}^2, \oys{3,1}^3, \oys{3,1}^4, \oys{3,1}^5 \,\right\rbrace$ (kagylók mint a gráf élei)
+		\end{itemize}
+	\end{comment}
+	
+
+	\section{Reprezentációs/modellezési kísérletek}
+
+	E dokumentumban a további fejezetrészekben már csak ,,történeti'' leírás van: milyen ábrázolásokkal kísérletezgettem. A gráfok először még nem jutottak eszembe, és csak fokozatosan ,,adták magukat''. Ennek a jelöléséi keresgélésnek a leírása jön. Illetve még szerepel egy-két jelölésbeli fejtegetés is.
+
+	\subsection{Alapfeladat és kezdeti ábrázolások}
+
+	A feladat tömörebb megfogalmazása (a feedben):
+	\begin{quotation}
+		,,\textit{Hat gyerek mindegyike négy fél kagylót gyűjtött a homokos parton, de senkinél nincs összetartozó pár. Ugyanakkor minden kagylóhéjnak a párját felszedte valaki. Kérdés: mindig össze tudsz gyűjteni három összetartozó párt, ha minden gyerektől egy felet választhatsz?}''
+	\end{quotation}
+	A cikk törzsében levő bővebb megfogalmazás:
+	\begin{quotation}
+		,,\textit{A Balaton partján a homokban 12 egész kagylónak a két fele, azaz 24 darab kagylóhéj található külön-külön szétszóródva.
+		Ezekből hat gyerek mindegyike 4 fél kagylót gyűjtött össze, de egyikük se talált párt.
+		Együtt mind a 24 felet összeszedték.
+		Előfordulhat-e az, hogy hiába kérhetek mindegyiküktől egy fél kagylót úgy, hogy azt én választhatom ki, mégse tudok így összekunyerálni három összetartozó párt?}''
+	\end{quotation}
+	
+	Heurisztikusan reménnyel kecsegtető kiindulásnak tűnt számomra első nekifutásra, hogy afféle első kísérleti lejegyzési ábrázolásnyelvet hozzak létre: az összetartozó kagylópárokat rendre egy-egy betű nagy- és kisbetűs változatával jelöltem, a gyereknek pedig identitást adtam:
+
+	\begin{tabular}{llllll}
+		\she1   & \she2  & \she3  & \she4  & \she5  & \she6 \\\hline
+		$a$     &        & $A$    &        &        &       \\
+		$B$     &        &        & $b$    &        &       \\
+		$c$     &        & $C$    &        &        &       \\
+		\vdots  & \vdots & \vdots & \vdots & \vdots & \vdots
+	\end{tabular}
+
+	A feladatban megadott szabályok ebben a jelölésben az alábbi módon jelennek meg:
+	\begin{itemize}
+		\item
+		Minden betűhöz megvan a hozzátartozó (de más állású) párja (,,\textit{a}''-hoz ,,\textit{A}'', ,,\textit{B}''hez ,,\textit{b}''), de sosem ugyanazon oszlopban (gyereknél).
+		Bár ebben a jelölésben nem feltétlenül áll pl. a ,,\textit{b}'' betűhöz a hozzátartozó ,,\textit{B}'' pár ugyanabban a sorban, de a feladat megszorítása nélkül, afféle esztétikai szabályként nyugodtan követhetjük ezt plusz konvencióként. Egy-egy gyerek ugyanis szabadon permutálhatja a kezében levő kagylókat, és feltehetjük, hogy kérésre bármikor képes hozzápasszintani egy másik gyerek adott kagylóhéjához az ő saját nála levő párját, mármint persze ha megvan neki.	
+		\item
+		Minden oszlopban négy betű van (pl. ,,\textit{a}'', ,,\textit{B}'', ,,\textit{E}'', ,,\textit{h}''). (És ahogy modtuk: nincs összetartozó betűpár!)
+	\end{itemize}
+
+	Hamar észrevehető két fontos dolog:
+	\begin{itemize}
+		\item Nem igazán érdemes adott kagyló esetében annak két felét egymásssal különböző szimbólummal ellátni- Épp azért, mivel a sorokban úgyis összetartozó betűpárok vannak --- pl.\ $a$ és $A$ betűpár, vagyy pl.\ $b$ és $B$ betűpár stb.\ ---, vagyis lényegében nincs jelentősége, hogy épp melyik a kis- és melyik a nagybetűs: bőven elég az,hogy ,,kipipálhatjuk'': a sorban megvan a kagyló mindkét fele.
+		\item Mivel így már a kagyló identitására terelődik a fókusz annak egyes félrészei helyett, ezért érdemes a héjak helyett maguknak a kagylóknak is identitást adni (a gyerekek analógiájára), és őket is kimerítően felsorolni, pl. oszlopszerűen.
+	\end{itemize}
+
+	\subsection{Az elképzelhető egyes ,,forgatókönyvek'' táblázatos ábrázolása}
+
+	Mindez nem mást jelent, mint hogy a feladat állításait táblázatos formában próbáljuk ábrázolni: a gyerekek identitásai (címkéi) a sorfejécben, a kagylók címkéi az oszlopfejlécekben, a cellákban pedig csak ,,kipipálunk'' vagy ,,üresen hagyunk''.
+	Bár magukat az elvont logikai állításoat még nem tudjuk ezen a nyelven megjeleníteni, de legalább az egyes elképzelt ,,megvalósulásokat'', ,,forgatókönyveket'' igen:
+
+	\begin{tabular}{l||l|l|l|l|l|l|}
+		         & $\she1$ & $\she2$ & $\she3$ & $\she4$ & $\she5$ & $\she6$\\\hline\hline
+		$\oys1$    & \chm  &       & \chm  &       &       &      \\\hline
+		$\oys2$    & \chm  &       &       & \chm  &       &      \\\hline
+		$\oys3$    & \chm  &       & \chm  &       &       &      \\\hline\hline\hline\hline
+		$\oys{12}$ &       &       &       &       & \chm  & \chm \\\hline
+	\end{tabular}
+
+	Pár példa-próbálkozás után a feladat szövegében adott szabályokat az előbbinél sokkal tömörebben tudjuk megfogalmazni:
+	\begin{itemize}
+		\item soronként pontosan kettő pipa van
+		\item oszloponként pontosan négy pipa van
+	\end{itemize}
+
+	Megjegyzés: a feladat tömörebb megfogalmazása (a feedben) természetesen egyenértékű a cikkbeli bővebb megfogalmazással.
+	Ennek a ,,segédtételnek'' az igazságát már be lehet látni a fenti egyszerű ábrázolásmódra alapozott megfontolásokkal.
+	A segédtételt amúgy nem használjuk, de jól jön bemelegítésre, a kognitív terep felfedező bebarangolására.
+
+	\subsection{Reguláris hurokélmentes multigráf}
+
+	Mindez egy máshonnan jólismert definíció általánosításnak tűnik.
+	Az egyszerű gráfok hagyományos definíciója:
+	Egyszerű gráfot $\mathfrak G = \left\langle \mathcal V, \mathcal E \right\rangle$ ad meg, ahol $\mathcal E \subseteq \left\{\,e \in 2^{\mathcal V}\, : \left|e\right| = 2\,\right\}$ megkötés.
+
+	A $\mathcal V$ csúcshalmaz akármilyen objektumokból állhat (pl.~gyerekek), de a $\mathcal E$ elemei azok az $V$ elemeiből alkotható kételemű halmazok lehetnek csak. Jelen feladat esetében ennek az ábrázolásnak a hátránya, hogy kevésbé természetes, hogy az élek szerepét is betölthetik bármilyen objektumok (jelen esetben kagylók). További hátrány, hogy ebben a modellben a multiélek ábrázolása nehézkes (eredeti megfogalmazásban nem is lehetséges, a ködös ,,multihalmaz'' fogalmának kiegészítő bevezetését igényli).
+
+	Egyszerű és hálás általánosításnak tűnik, hogy ne csak a $\mathcal V$ csúcsok, hanem $\mathcal E$ elemei is tetszőleges dolgok is lehessenek, és az is, hogy szükség esetén a multiélek ábrázolása természetes módon megoldhatóvá váljék.
+	
+	Ezért a gráfot (illetve multigráfot) mostantól rendezett $\left\langle \mathcal V, \mathcal E, \incidsymbol\right\rangle$ hármasként fogjuk definiálni, ahol a harmadik elem egyfajta ,,illeszkedési reláció'': a gráfra jellemző megkötéseket épp e külön $\incid$ ,,illeszkedési reláció'' szabályaival adjuk meg, a gráfot mintegy véges geometriának tekintve, ahol az $\incid$ illeszkedési relációra sajátos megkötések érvényesek. Ennek azonnali járulékos előnye lesz az is, hogy szükség esetén a multiélek ábrázolása is természetes módon megoldhatóvá válik, bármiféle pótlólagos ,,multihalmaz''-fogalmának nehézkes bevezetése nélkül is.
+
+	Az általánosabb gráfdefiníció tehát:
+
+	Egy egyszerű gráfot egy $\mathfrak G = \left\langle \mathcal V, \mathcal E, \incidsymbol\right\rangle$ ad meg, ahol $\incidsymbol \subseteq \mathcal V \times \mathcal E$, amin belül meg érvényesek az alábbi megkötések:
+	\begin{itemize}
+		\item
+		Nincs hurokél: $\forall e \in \mathcal E: \exists!_2 P \in \mathcal V: P \incid e$ 
+		\item
+		Nincsenek többszörös élek: $\forall P_1, P_2 \in \mathcal V: \exists!_0^1 e \in \mathcal E: P_1  \incid e \land P_2 \incid e$
+	\end{itemize}
+
+	Némi szintaktikus cukor a jelölések terén: $\exists!$ jelentése ,,\emph{pontosan egy létezik}'', $\exists!_2$: ,,\emph{pontosan kettő létezik}'', $\exists!_0^1$: ,,\emph{legfeljebb egy létezik}''. Ezek felírhatók a hagyományos $\exists$ kvantor és $to$ implikáció használatára szorítkozva is, de így ez új jelölésekkel tömorebb a jelölés.
+
+	Az egész multiélek kapcsán előjött fejtegetés azért jön elő, mert a feladatok során valóban van gyakorlati szükségünk multiélek ábrázolására.
+	Az alábbi feladat-forgatókönyvpélda megmutatja, hogy a többszörös éleket meg kell engendnünk (a hurokélmentesség megkövetelése viszont továbbra is szükséges):
+
+	\begin{tabular}{l||l|l|l|l|l|l|}
+		         & $\she1$ & $\she2$ & $\she3$ & $\she4$ & $\she5$ & $\she6$\\\hline\hline
+		$\oys1$    & \chm  &       & \chm  &       &       &      \\\hline
+		$\oys2$    & \chm  &       &       & \chm  &       &      \\\hline
+		$\oys3$    & \chm  &       & \chm  &       &       &      \\\hline\hline\hline\hline
+		$\oys{12}$ &       &       &       &       & \chm  & \chm \\\hline
+	\end{tabular}
+
+	Simán elképzelhető, hogy a gyerekek így osztoznak meg kagylóhéjaikon. Ennek a felállásnak a gráfelméleti ábrázolása viszont valóban csak multiélek megengedésével lehetséges.
+
+	Ezért a többszörös éleket kizáró feltétel elhagyásával a \emph{multigráf} definícióját kapjuk, de a hurokélmentesség követelménye megmarad.
+	Adjuk még hozzá a feladat egyéb megkötését: azt, hogy minden egyes gyereknél pontosan 4 kagylófél van: gráfelméleti nyelven szólva minden egyes csúcs fokszáma 4. vagyis a gráf 4-reguláris. ,,Axiómarendszerünk'' tehát az alábbira módosul:
+	\begin{itemize}
+		\item
+		Hurokélmentesség: $\forall e \in \mathcal E: \exists!_2 P \in \mathcal V: P \incid e$ 
+		\item
+		4-regularitás: $\forall P \in \mathcal V: \exists!_4 e \in \mathcal E: P  \incid e$ 
+	\end{itemize}
+	ezekre kell alkalmas ,,modelleket'' találnunk (vagy az axiómarendszer kielégíthetetlenségét bizonyítanunk). A modellere a feladat még további megvizsgálandó követelményit is tartalmaz, de erre későbbb térünk vissza.
+
+	Mindenesetre megkaptuk az épp a feladat reprezentálásához szükséges modellezési struktúrafajtát: reguláris hurokélmentes multigráfok. Ezzel majd a másik két feladat is reprezentáható lesz. Az Alapfeladat például csak annyiban mond többet, hogy a gyerekek halmaza 6-elemű, vagyis 6-rendű gráfról van szó: $\left|\mathcal V|\right| = 6$.
+
+	\begin{itemize}
+		\item
+		Hurokélmentesség: $\forall e \in \mathcal E: \exists!_2 P \in \mathcal V: P \incid e$ 
+		\item
+		4-regularitás: $\forall P \in \mathcal V: \exists!_4 e \in \mathcal E: P  \incid e$
+		\item
+		6-rendű gráf: $\left|\mathcal V\right| = 6$
+	\end{itemize}
+
+	Az élek számát is tudjuk ($\left|\mathcal E|\right| = 12$), de mivel ez ,,axiómáinkból'' is kikövetkeztethető, ezért az ,,axiómák'' közé nem soroljuk fel.
+
+	A második feladat ,,megfogalmazó'' struktúrái: 6-rendű 5-reguláris hurokélmentes multigráfok:
+	\begin{itemize}
+		\item
+		Hurokélmentesség: $\forall e \in \mathcal E: \exists!_2 P \in \mathcal V: P \incid e$
+		\item
+		5-regularitás: $\forall P \in \mathcal V: \exists!_5 e \in \mathcal E: P  \incid e$
+		\item
+		6-rendű gráf: $\left|\mathcal V\right| = 6$
+	\end{itemize}
+
+
+	A harmadik feladat ,,megfogalmazó'' struktúrái: 10-rendű 5-reguláris hurokélmentes multigráfok:
+	\begin{itemize}
+		\item
+		Hurokémentesség: $\forall e \in \mathcal E: \exists!_2 P \in \mathcal V: P \incid e$
+		\item
+		10-regularitás: $\forall P \in \mathcal V: \exists!_{10} e \in \mathcal E: P  \incid e$
+		\item
+		10-rendű gráf: $\left|\mathcal V\right| = 10$
+	\end{itemize}
+
+
+	\subsubsection{A ,,történeti kerülőút'' levágása: modellhelyesség közvetlen igazolása}
+
+	Az, hogy a  gráfelmélet ,,,kész'' sstruktúraneveket bocsát trendelkezésünkre gyorséttermi étlapjáról, lehetővé teszi, hogy az eddig elhangzott nehézkes ,,történelmi'' bevezetőt elhagyjuk (,,\textit{Hogyan ia jöttem rá, merre kell elindulni}''), és immár közvetlenül a gárfelméletben gondolkodva, közvetlenül igazoljuk, hogy az előbb mutatott modellezés helyes, és valüban a feladat világát írja le.
+
+	\begin{itemize}
+		\item A gyerekek a csúcsok, 6 gyerek van. $\checkmark$
+		\item A kagylók az élek. (12 kagyló van --- bár ez következni is fog a többiből.) $\checkmark$
+		\item Minden egyes kagyló pontosan két gyerek közt osztja meg hájait, egyik hé jaz  egyik, a másik a másik gyereknél. $\checkmark$
+		\item Nem titja semmi, hogy két gyerek több kagylón is közösködhetik. $\checkmark$
+		\item \dots?
+	\end{itemize}
+
+	\subsection{A követelmény --- független lefogó élhalmaz keresése}
+
+	\begin{itemize}
+		\item
+		$E$ független  élhalmaz létezése:\\$\exists E \subseteq \mathcal E: \forall e_1, e_2 \in E: e_1 \neq e_2 \to \nexists P \in \mathcal V: P \incid e_1 \land P \incid e_2$
+		\item
+		$E$ lefogó élhalmaz létezése:\\$\exists E \subseteq \mathcal E: \forall P \in \mathcal V: \exists e \in E: P \incid s$
+		\item
+		A feladatok kérdései: Igaz-e, hogy létezik független lefogó élhalmaz minden \dots
+		\begin{enumerate}
+			\item \dots 6-od rendű 4-reguláris\dots 
+			\item \dots 6-od rendű 5-reguláris\dots
+			\item \dots 10-ed rendű 10-reguláris\dots
+		\end{enumerate}
+		\dots hurokélmentes multigráfban?
+	\end{itemize}
+
+	\begin{comment}
+		\section{Megoldás}
+		\subsection{Ellenpélda: a ,,fölösleges'' (hozzájárulású) gyerek a sorban}
+		\subsection{Nem-összefüggőség: komponensekre bontott megvalósulás}
+
+		\subsubsection{6-rendű 4-reguláris multigráf 2-komponensű megvalósítása}
+		\input{6-rendu-4-regularis.pgf}
+
+		\subsubsection{6-rendű 5-reguláris multigráf 2-komponensű megvalósítása}
+		\input{6-rendu-5-regularis.pgf}
+
+		\subsubsection{10-rendű 10-reguláris multigráf 3-komponensű megvalósítása}
+		\input{10-rendu-10-regularis.pgf}
+	\end{comment}
+
+\end{document}

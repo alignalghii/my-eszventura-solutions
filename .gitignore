@@ -1,0 +1,9 @@
+*.pgf.tex
+*.pstricks.tex
+*.aux
+*.dvi
+*.log
+*.pdf
+*.toc
+
+obsolete
