@@ -209,7 +209,7 @@
 	Az egyszerű gráfok hagyományos definíciója:
 	Egyszerű gráfot $\mathfrak G = \left\langle \mathcal V, \mathcal E \right\rangle$ ad meg, ahol $\mathcal E \subseteq \left\{\,e \in 2^{\mathcal V}\, : \left|e\right| = 2\,\right\}$ megkötés.
 
-	A $\mathcal V$ csúcshalmaz akármilyen objektumokból állhat (pl.~gyerekek), de a $\mathcal E$ elemei azok az $V$ elemeiből alkotható kételemű halmazok lehetnek csak. Jelen feladat esetében ennek az ábrázolásnak a hátránya, hogy kevésbé természetes, hogy az élek szerepét is betölthetik bármilyen objektumok (jelen esetben kagylók). További hátrány, hogy ebben a modellben a multiélek ábrázolása nehézkes (eredeti megfogalmazásban nem is lehetséges, a ködös ,,multihalmaz'' fogalmának kiegészítő bevezetését igényli).
+	A $\mathcal V$ csúcshalmaz akármilyen objektumokból állhat (pl.~gyerekek), de a $\mathcal E$ elemei azok a $\mathcal V$ elemeiből alkotható kételemű halmazok lehetnek csak. Jelen feladat esetében ennek az ábrázolásnak a hátránya, hogy kevésbé természetes, hogy az élek szerepét is betölthetik bármilyen objektumok (jelen esetben kagylók). További hátrány, hogy ebben a modellben a multiélek ábrázolása nehézkes (eredeti megfogalmazásban nem is lehetséges, a ködös ,,multihalmaz'' fogalmának kiegészítő bevezetését igényli).
 
 	Egyszerű és hálás általánosításnak tűnik, hogy ne csak a $\mathcal V$ csúcsok, hanem $\mathcal E$ elemei is tetszőleges dolgok is lehessenek, és az is, hogy szükség esetén a multiélek ábrázolása természetes módon megoldhatóvá váljék.
 	
@@ -225,7 +225,7 @@
 		Nincsenek többszörös élek: $\forall P_1, P_2 \in \mathcal V: \exists!_0^1 e \in \mathcal E: P_1  \incid e \land P_2 \incid e$
 	\end{itemize}
 
-	Némi szintaktikus cukor a jelölések terén: $\exists!$ jelentése ,,\emph{pontosan egy létezik}'', $\exists!_2$: ,,\emph{pontosan kettő létezik}'', $\exists!_0^1$: ,,\emph{legfeljebb egy létezik}''. Ezek felírhatók a hagyományos $\exists$ kvantor és $to$ implikáció használatára szorítkozva is, de így ez új jelölésekkel tömorebb a jelölés.
+	Némi szintaktikus cukor a jelölések terén: $\exists!$ jelentése ,,\emph{pontosan egy létezik}'', $\exists!_2$: ,,\emph{pontosan kettő létezik}'', $\exists!_0^1$: ,,\emph{legfeljebb egy létezik}''. Ezek felírhatók a hagyományos $\exists$ kvantor és $\to$ implikáció használatára szorítkozva is, de így ez új jelölésekkel tömorebb a jelölés.
 
 	Az egész multiélek kapcsán előjött fejtegetés azért jön elő, mert a feladatok során valóban van gyakorlati szükségünk multiélek ábrázolására.
 	Az alábbi feladat-forgatókönyvpélda megmutatja, hogy a többszörös éleket meg kell engendnünk (a hurokélmentesség megkövetelése viszont továbbra is szükséges):
@@ -250,7 +250,7 @@
 	\end{itemize}
 	ezekre kell alkalmas ,,modelleket'' találnunk (vagy az axiómarendszer kielégíthetetlenségét bizonyítanunk). A modellere a feladat még további megvizsgálandó követelményit is tartalmaz, de erre későbbb térünk vissza.
 
-	Mindenesetre megkaptuk az épp a feladat reprezentálásához szükséges modellezési struktúrafajtát: reguláris hurokélmentes multigráfok. Ezzel majd a másik két feladat is reprezentáható lesz. Az Alapfeladat például csak annyiban mond többet, hogy a gyerekek halmaza 6-elemű, vagyis 6-rendű gráfról van szó: $\left|\mathcal V|\right| = 6$.
+	Mindenesetre megkaptuk az épp a feladat reprezentálásához szükséges modellezési struktúrafajtát: reguláris hurokélmentes multigráfok. Ezzel majd a másik két feladat is reprezentáható lesz. Az Alapfeladat például csak annyiban mond többet, hogy a gyerekek halmaza 6-elemű, vagyis 6-rendű multigráfról van szó: $\left|\mathcal V\right| = 6$.
 
 	\begin{itemize}
 		\item
@@ -261,7 +261,7 @@
 		6-rendű gráf: $\left|\mathcal V\right| = 6$
 	\end{itemize}
 
-	Az élek számát is tudjuk ($\left|\mathcal E|\right| = 12$), de mivel ez ,,axiómáinkból'' is kikövetkeztethető, ezért az ,,axiómák'' közé nem soroljuk fel.
+	Az élek számát is tudjuk ($\left|\mathcal E\right| = 12$), de mivel ez ,,axiómáinkból'' is kikövetkeztethető, ezért az ,,axiómák'' közé külön nem soroljuk fel.
 
 	A második feladat ,,megfogalmazó'' struktúrái: 6-rendű 5-reguláris hurokélmentes multigráfok:
 	\begin{itemize}
